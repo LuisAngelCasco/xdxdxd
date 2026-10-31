@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economía de la Atención & Desinformación Algorítmica | CTS</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent: #38bdf8;
+            --accent-purple: #c084fc;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --font-body: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* HEADER & HERO */
+        header {
+            background: radial-gradient(circle at top right, #1e1b4b, var(--bg-dark));
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            max-width: 900px;
+            margin: 0 auto 1rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* NAV */
+        nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 0.8rem 1rem;
+            overflow-x: auto;
+        }
+
+        .nav-container a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-container a:hover {
+            color: var(--accent);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        /* CARDS & GRID */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            color: var(--accent-purple);
+            margin-bottom: 0.75rem;
+        }
+
+        /* CTS TAGS */
+        .cts-tag {
+            display: inline-block;
+            background: #334155;
+            color: #f1f5f9;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: var(--font-code);
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* TABLE */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #0f172a;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Q&A DEFENSE */
+        .qa-box {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .qa-box h4 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .qa-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO HEADER -->
+    <header>
+        <span class="badge">Ciencia, Tecnología y Sociedad • Tema 3</span>
+        <h1>La Economía de la Atención y la Esfera Pública Digital</h1>
+        <p class="subtitle">Algoritmos de Recomendación, Sesgos e IA Generativa en la Propagación de Desinformación</p>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="#problematic"><i class="fa-solid fa-triangle-exclamation"></i> Problemática</a>
+            <a href="#teoria"><i class="fa-solid fa-brain"></i> Marco Teorico</a>
+            <a href="#caso"><i class="fa-solid fa-newspaper"></i> Caso de Estudio</a>
+            <a href="#etica"><i class="fa-solid fa-code"></i> Dimensión Ética</a>
+            <a href="#exposicion"><i class="fa-solid fa-sliders"></i> Exposición Oral</a>
+            <a href="#defensa"><i class="fa-solid fa-graduation-cap"></i> Preguntas Defensa</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- 1. PROBLEMÁTICA & OBJETIVO -->
+        <section id="problematic">
+            <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> Problemática u Objetivo</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fa-solid fa-circle-nodes"></i> La Problemática</h3>
+                    <p>Los algoritmos de optimización de <em>engagement</em> priorizan contenido cargado emocionalmente y sensacionalista para maximizar el tiempo de permanencia en pantalla. La irrupción masiva de herramientas de IA Generativa reduce drásticamente el costo de generar noticias falsas y <em>deepfakes</em> hiper-personalizados.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fa-solid fa-compass"></i> Pregunta Central</h3>
+                    <p>¿De qué manera la optimización matemática del <em>engagement</em> en plataformas digitales y el uso de IA generativa reconfiguran la opinión pública y afectan los procesos democráticos en nuestro entorno?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MARCO TEÓRICO Y CONCEPTOS CTS -->
+        <section id="teoria">
+            <h2 class="section-title"><i class="fa-solid fa-book-bookmark"></i> Marco Teórico & Claves CTS</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                Para interpretar este fenómeno, articulamos los siguientes conceptos críticos interdisciplinarios:
+            </p>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Economía de la Atención</h3>
+                    <p>Modelo de negocio donde la atención humana es un recurso escaso y monetizable mediante publicidad dirigida.</p>
+                    <span class="cts-tag">Capitalismo de Vigilancia</span>
+                </div>
+                <div class="card">
+                    <h3>Cámaras de Eco & Burbujas de Filtro</h3>
+                    <p>Sistemas de recomendación que aíslan al usuario exponiéndolo únicamente a contenidos que confirman sus creencias preexistentes.</p>
+                    <span class="cts-tag">Sesgo de Confirmación</span>
+                </div>
+                <div class="card">
+                    <h3>Funciones de Recompensa Perversas</h3>
+                    <p>Optimización a ciegas de métricas como CTR o retención, sin restricciones explícitas de calidad o desinformación.</p>
+                    <span class="cts-tag">Externalidades Sociales</span>
+                </div>
+                <div class="card">
+                    <h3>Moderation Gap Regional</h3>
+                    <p>Desigualdad en la moderación de contenidos entre países centrales y regiones periféricas o hablantes de español.</p>
+                    <span class="cts-tag">Sesgo Geográfico</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CASO DE ESTUDIO DOCUMENTADO -->
+        <section id="caso">
+            <h2 class="section-title"><i class="fa-solid fa-microscope"></i> Caso Real Analizado</h2>
+            <div class="card">
+                <h3 style="font-size: 1.3rem;">Desinformación Sintética en Procesos Electorales Recientes (Argentina / LatAm)</h3>
+                <p style="margin-top: 0.5rem;">
+                    Durante los últimos ciclos electorales en América Latina, se ha registrado un uso intensivo de <strong>audio-deepfakes y videos generados con IA</strong> diseñados para simular declaraciones erróneas o escándalos de candidatos minutos antes del periodo de veda.
+                </p>
+                <ul style="margin: 1rem 0 1rem 1.5rem; color: var(--text-muted);">
+                    <li><strong>Mecanismo de propagación:</strong> Grupos cerrados de difusión instantánea y aceleración mediante algoritmos en redes sociales.</li>
+                    <li><strong>Efecto en la deliberación:</strong> Saturación del ecosistema informativo con contenido sintético verosímil pero falso, superando la capacidad de respuesta del <em>fact-checking</em> periodístico (Chequeado, LatamChequea).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 4. DIMENSIÓN ÉTICA Y CIENCIA DE DATOS -->
+        <section id="etica">
+            <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> Dimensión Ética en Ciencia de Datos</h2>
+            <div class="card">
+                <p>
+                    Como profesionales de Ciencia de Datos, optimizar a ciegas una función objetivo (por ejemplo, Click-Through-Rate o tiempo de retención) genera <strong>externalidades sociales severas</strong>. Es indispensable integrar métricas de <em>Fairness</em>, transparencia algorítmica y auditar de forma constante las funciones de recompensa (<em>reward functions</em>) en los modelos predictivos.
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. ESTRUCTURA DE LA EXPOSICIÓN ORAL -->
+        <section id="exposicion">
+            <h2 class="section-title"><i class="fa-solid fa-stopwatch"></i> Plan de Exposición Oral (8 a 10 min)</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bloque / Diapositiva</th>
+                            <th>Contenido Principal</th>
+                            <th>Tiempo Est.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Diapositiva 1</strong></td>
+                            <td>Portada e integrantes del grupo.</td>
+                            <td>0.5 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diapositiva 2</strong></td>
+                            <td>La economía de la atención y mecánicas de recomendación.</td>
+                            <td>1.5 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diapositiva 3</strong></td>
+                            <td>Análisis del caso real (desinformación o deepfakes).</td>
+                            <td>2.0 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diapositiva 4</strong></td>
+                            <td>Consecuencias en la polarización y la convivencia democrática.</td>
+                            <td>2.5 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diapositiva 5</strong></td>
+                            <td>Diseño de algoritmos responsables y auditorías de sesgo.</td>
+                            <td>2.0 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diapositiva 6</strong></td>
+                            <td>Conclusión y propuestas de mitigación.</td>
+                            <td>1.5 min</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. PREGUNTAS PARA LA DEFENSA INDIVIDUAL -->
+        <section id="defensa">
+            <h2 class="section-title"><i class="fa-solid fa-comments"></i> Preguntas para la Defensa Oral Individual</h2>
+
+            <div class="qa-box">
+                <h4>1. ¿Por qué el contenido engañoso o de indignación suele propagarse más rápido en una red social?</h4>
+                <p>Porque las emociones de indignación o rabia activan respuestas psicológicas inmediatas que maximizan la interacción rápida (compartir, comentar). Los algoritmos interpretan este <em>engagement</em> acelerado como una señal de alta calidad, priorizando su visibilidad masiva.</p>
+            </div>
+
+            <div class="qa-box">
+                <h4>2. ¿Cuál es el límite entre moderación algorítmica de contenidos y censura privada?</h4>
+                <p>El límite radica en la transparencia técnica y el debido proceso. La moderación algorítmica debe mitigar contenidos ilegales o dañinos explícitos sin restringir de forma discrecional o sesgada la deliberación política legítima mediante decisiones opacas de corporaciones privadas.</p>
+            </div>
+
+            <div class="qa-box">
+                <h4>3. ¿En qué consiste el "sesgo de confirmación" y cómo lo explota el diseño de las redes sociales?</h4>
+                <p>Es la tendencia cognitiva humana a buscar o interpretar información de forma que confirme ideas previas. Los motores de recomendación explotan este sesgo entregando contenido hiper-personalizado que valida los prejuicios del usuario para retener su atención.</p>
+            </div>
+
+            <div class="qa-box">
+                <h4>4. ¿Qué herramientas técnicas o metadatos existen para auditar o detectar contenido sintético?</h4>
+                <p>Existen estándares de autenticidad de contenido (como C2PA), firmas criptográficas de metadatos de procedencia, marca de agua digital invisible (watermarking) y algoritmos de análisis forense para detectar anomalías físicas o artefactos de textura visual/auditiva.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Trabajo Práctico de Investigación - Cátedra de Ciencia, Tecnología y Sociedad</p>
+    </footer>
+
+</body>
+</html>
